@@ -20,3 +20,12 @@ return function (App $app) {
         return $logger;
     };
 };
+   $container['db'] = function ($c) {
+       try {
+           $db = new PDO("sqlite:".__DIR__."/blog.db");
+           $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       } catch (Exception $e) {
+        echo $e->getMesssage();
+    }
+    return $db;
+};
