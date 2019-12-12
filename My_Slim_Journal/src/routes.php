@@ -13,6 +13,6 @@ return function (App $app) {
 
         // Render index view
         $args['post'] = $this->db;
-        return $container->get('db')->render($response, 'index.phtml', $args);
+        return $this->renderer->render($response, 'index.phtml', $args);
     });
 };
