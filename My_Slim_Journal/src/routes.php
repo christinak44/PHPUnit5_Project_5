@@ -12,7 +12,8 @@ return function (App $app) {
         $container->get('logger')->info("Slim-Skeleton '/' route");
 
         // Render index view
-        $args['post'] = $this->db;
-        return $this->renderer->render($response, 'index.phtml', $args);
+        $args = array_merge($args, $request->getEntries());
+        //$args['post'] = $this->db;
+        return $this->renderer->render($response, 'Blog_Home.phtml', $args);
     });
 };
