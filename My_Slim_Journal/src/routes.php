@@ -13,8 +13,8 @@ return function (App $app) {
         $container->get('logger')->info("Slim-Skeleton '/' route");
 
         // Render index view
-        $entry = $this->db;
-        $args = array_merge($args, $Entry->getEntries());
+        $entries = $this->db;
+        $args = array_merge($args, $entries->getEntries());
         //$args['post'] = $this->db;
         return $this->renderer->render($response, 'Blog_Home.phtml', $args);
     });

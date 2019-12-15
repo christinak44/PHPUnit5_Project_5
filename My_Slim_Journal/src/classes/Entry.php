@@ -29,7 +29,7 @@ class Entry
         $sql->bindParam('id', $entry_id);
         $sql->execute();
         $entry = $sql->fetch();
-        if (empty($entries)) {
+        if (empty($entry)) {
             throw new ApiException(ApiException::ENTRY_NOT_FOUND, 404);
         }
         return $entry;
