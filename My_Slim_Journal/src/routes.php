@@ -3,6 +3,7 @@
 use Slim\App;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use slim\App\Entry;
 
 return function (App $app) {
     $container = $app->getContainer();
@@ -12,7 +13,8 @@ return function (App $app) {
         $container->get('logger')->info("Slim-Skeleton '/' route");
 
         // Render index view
-        $args = array_merge($args, $request->getEntries());
+        $entry = $this->db;
+        $args = array_merge($args, $Entry->getEntries());
         //$args['post'] = $this->db;
         return $this->renderer->render($response, 'Blog_Home.phtml', $args);
     });
