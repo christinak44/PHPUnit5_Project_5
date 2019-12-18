@@ -6,7 +6,7 @@ use Slim\Http\Response;
 use App\Classes\Entry;
 return function (App $app) {
     $container = $app->getContainer();
-    $app->get('/entries', function (Request $request, Response $response, array $args) use ($container) {
+    $app->get(/*['GET','POST'], */'/', function (Request $request, Response $response, array $args) use ($container) {
         // Sample log message
         $container->get('logger')->info("Slim-Skeleton '/' route");
         // Render index view
@@ -18,12 +18,13 @@ return function (App $app) {
         $args['entries'] = $entries;
         return $this->renderer->render($response, 'Blog_Home.phtml', $args);
     });
-    $app->get('/', function (Request $request, Response $response, array $args) use ($container) {
+    $app->map(['GET','POST'],'/entry', function (Request $request, Response $response, array $args) use ($container) {
 
         $entry = new Entry($this->db);
-        $details = $entry->getEntry(3);
+        $id = $this->entry->id;
+        $details = $entry->getEntry($id);
         //var_dump($details);
-         //$args = array_merge($args, $entries);
+        $args = array_merge($args, $request->getParsedBody());
         //$args['post'] = $this->db;
         $args['details'] = $details;
         return $this->renderer->render($response, 'detail.phtml', $args);

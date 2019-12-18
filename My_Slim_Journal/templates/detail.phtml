@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<?php
+if(!empty($_GET['id'])) {
+  $id =filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+}
+?>
 <html>
     <head>
         <meta charset="utf-8">
