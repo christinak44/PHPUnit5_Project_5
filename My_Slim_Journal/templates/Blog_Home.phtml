@@ -29,7 +29,7 @@
                       if (is_array($entries) || is_object($entries)) {
                       foreach ($entries as $entry) {
                            echo "<article>";
-                           echo "<h2><a href='/detail.phtml?id=" . $entry['id'] . "'>" . $entry['title'] . "</a></h2>";
+                           echo "<h2><a href='/entry?id=" . $entry['id'] . "'>" . $entry['title'] . "</a></h2>";
                            echo "<time>" . date('F jS,Y',strtotime($entry['date'])) . "</time> &nbsp <a href='remove_entry.php?id=" . $entry['id'] . "' style='color:#f5671b'>Delete</a><br>";
                            echo "</article>";
                         }
