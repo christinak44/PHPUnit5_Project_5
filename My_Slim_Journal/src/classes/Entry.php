@@ -1,5 +1,5 @@
 <?php
-namespace App\Model;
+namespace App\Classes;
 use App\Exception\ApiException;
 
 class Entry
@@ -21,12 +21,12 @@ class Entry
         }
         return $entries;
     }
-    public function getEntry($entry_id)
+    public function getEntry($id)
     {
         $sql = $this->db->prepare(
             'SELECT * FROM posts WHERE id=:id'
         );
-        $sql->bindParam('id', $entry_id);
+        $sql->bindParam('id', $id);
         $sql->execute();
         $entry = $sql->fetch();
         if (empty($entry)) {
@@ -62,20 +62,20 @@ class Entry
         $sql->bindParam('title', $data['title']);
         $sql->bindParam('date', $data['date']);
         $sql->bindParam('date', $data['body']);
-        $sql->bindParam('id', $data['entry_id']);
+        $sql->bindParam('id', $data['id']);
         $sql->execute();
         if ($sql->rowCount()<1) {
             throw new ApiException(ApiException::ENTRY_UPDATE_FAILED);
         }
-        return $this->getEntry($data['entry_id']);
+        return $this->getEntry($data['id']);
     }
-    public function deleteEntry($entry_id)
+    public function deleteEntry($id)
     {
-        $this->getEntry($entry_id);
+        $this->getEntry($id);
         $sql = $this->db->prepare(
             'DELETE FROM posts WHERE id=:id'
         );
-        $sql->bindParam('id', $entry_id);
+        $sql->bindParam('id', $id);
         $sql->execute();
         if ($sql->rowCount()<1) {
             throw new ApiException(ApiException::ENTRY_DELETE_FAILED);
