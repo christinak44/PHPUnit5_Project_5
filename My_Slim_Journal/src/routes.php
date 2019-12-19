@@ -16,17 +16,19 @@ return function (App $app) {
         // $args = array_merge($args, $entries);
         //$args['post'] = $this->db;
         $args['entries'] = $entries;
-        return $this->renderer->render($response, 'Blog_Home.phtml', $args);
+        return $this->view->render($response, 'Blog_Home.twig', $args);
     });
-    $app->map(['GET','POST'],'/entry', function (Request $request, Response $response, array $args) use ($container) {
+    $app->map(['GET','POST'],'/entry/{id}', function (Request $request, Response $response, array $args) use ($container) {
 
         $entry = new Entry($this->db);
-        $id = $this->entry->id;
-        $details = $entry->getEntry($id);
+
+        $entries = $entry->getEntry($args['id']);
+
         //var_dump($details);
-        $args = array_merge($args, $request->getParsedBody());
+        //$args = array_merge($args, $request->getParsedBody());
         //$args['post'] = $this->db;
-        $args['details'] = $details;
-        return $this->renderer->render($response, 'detail.phtml', $args);
+        $args['details'] = $entries;
+        //$args['entry'] = $entries;
+        return $this->view->render($response, 'detail.twig', $args);
     });
 };

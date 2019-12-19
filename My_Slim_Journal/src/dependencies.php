@@ -4,12 +4,23 @@ use Slim\App;
 
 return function (App $app) {
     $container = $app->getContainer();
+//instead of render twig-views
+    $container['view'] = function ($container) {
+    $view = new \Slim\Views\Twig(__DIR__ . '/../templates', [
+       'cache' => false,
+   ]);
+   $view->addExtension(new \Slim\Views\TwigExtension(
+       $container->router,
+       $container->request->getUri()
+   ));
+   return $view;
 
+    };
     // view renderer
-    $container['renderer'] = function ($c) {
+  /*  $container['renderer'] = function ($c) {
         $settings = $c->get('settings')['renderer'];
         return new \Slim\Views\PhpRenderer($settings['template_path']);
-    };
+    };*/
 
     // monolog
     $container['logger'] = function ($c) {

@@ -22,19 +22,16 @@
             <div class="container">
                 <div class="entry-list">
 
-                      <?php
-                      if(!empty($_GET['id'])) {
-                        $id =filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-                      }
-                      if (is_array($entries) || is_object($entries)) {
-                      foreach ($entries as $entry) {
-                           echo "<article>";
-                           echo "<h2><a href='/entry?id=" . $entry['id'] . "'>" . $entry['title'] . "</a></h2>";
-                           echo "<time>" . date('F jS,Y',strtotime($entry['date'])) . "</time> &nbsp <a href='remove_entry.php?id=" . $entry['id'] . "' style='color:#f5671b'>Delete</a><br>";
-                           echo "</article>";
-                        }
-                      }
-                        ?>
+                      {% for item in entries %}
+                        <article>
+                        <h2><a href="/entry/{{ item.id }}" > {{ item.title }} </a></h2>
+                        <time> {{ item.date }} </time>
+                        </article>
+                        {% endfor %}
+
+
+
+
                         <!--<h2><a href="detail.html">The best day I’ve ever had</a></h2>
                         <time datetime="2016-01-31 1:00">January 31, 2016 at 1:00</time>
                     </article>
