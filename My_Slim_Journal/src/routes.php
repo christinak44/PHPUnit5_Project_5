@@ -10,6 +10,7 @@ return function (App $app) {
         // Sample log message
         $container->get('logger')->info("Slim-Skeleton '/' route");
         // Render index view
+        //$entries = Entry::all()->get();
         $entry = new Entry($this->db);
         $entries = $entry->getEntries();
         //var_dump($entries);

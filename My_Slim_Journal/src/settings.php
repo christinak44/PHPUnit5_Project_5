@@ -15,5 +15,15 @@ return [
             'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/app.log',
             'level' => \Monolog\Logger::DEBUG,
         ],
+        //https://www.cloudways.com/blog/using-eloquent-orm-with-slim/
+        //pass eloquent connection to slim settings object
+      /*  'db' => [
+               'driver' => 'sqlite',
+               'host' => 'localhost',
+               'database' => __DIR__ . '/blog.db',
+               'charset' => 'utf8',
+               'collation' => 'utf8_unicode_ci',
+       ],*/
+
     ],
 ];
