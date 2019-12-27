@@ -31,15 +31,15 @@ return function (App $app) {
         return $logger;
     };
     //boot eloquent connection
-/* $capsule = new \Illuminate\Database\Capsule\Manager;
+ $capsule = new \Illuminate\Database\Capsule\Manager;
  $capsule->addConnection($container['settings']['db']);
  $capsule->setAsGlobal();
  $capsule->bootEloquent();
  //pass the connection to global container (created in previous article)
  $container['db'] = function ($container) use ($capsule){
     return $capsule;
-  }; */
-    $container['db'] = function ($c) {
+  };
+  /*  $container['db'] = function ($c) {
        try {
            $db = new PDO("sqlite:".__DIR__."/blog.db");
            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -47,5 +47,5 @@ return function (App $app) {
         echo $e->getMesssage();
      }
     return $db;
-  };
+  };*/
 };
