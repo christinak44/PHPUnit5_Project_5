@@ -3,7 +3,7 @@
 use Slim\App;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use App\Classes\Entry_Eloquent;
+use App\Classes\Entry;
 return function (App $app) {
     $container = $app->getContainer();
     $app->get(/*['GET','POST'], */'/', function (Request $request, Response $response, array $args) use ($container) {
@@ -19,16 +19,17 @@ return function (App $app) {
         $args['entries'] = $entries;
         return $this->view->render($response, 'Blog_Home.twig', $args);
     });
-    $app->map(['GET','POST'],'/entry/{id}', function (Request $request, Response $response, array $args) use ($container) {
+    $app->get('/entry/[{id}]', function (Request $request, Response $response, array $args) use ($container) {
 
-        $entry = new Entry($this->db);
+        //$entry = new Entry($this->db);
 
-        $entries = $entry->getEntry($args['id']);
+        //$entries = $entry->getEntry($args['id']);
 
-        //var_dump($details);
+        $entry = Entry::where('id','=', $id);
+
         //$args = array_merge($args, $request->getParsedBody());
         //$args['post'] = $this->db;
-        $args['details'] = $entries;
+        $args['details'] = $entry;
         //$args['entry'] = $entries;
         return $this->view->render($response, 'detail.twig', $args);
     });

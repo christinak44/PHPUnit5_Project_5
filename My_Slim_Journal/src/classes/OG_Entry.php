@@ -1,16 +1,8 @@
 <?php
 namespace App\Classes;
 use App\Exception\ApiException;
-use Illuminate\Database\Eloquent\Model;
 
-class Entry extends Model
-{
-   public $timestamps = false;
-   protected $table = 'posts';
-   protected $fillable = ['title','date','body'];
-}
-
-/*class Entry
+class Entry
 {
     protected $db;
     public function __construct($db)
@@ -90,4 +82,4 @@ class Entry extends Model
         }
         return ['message' => 'The entry was deleted'];
     }
-}*/
+}

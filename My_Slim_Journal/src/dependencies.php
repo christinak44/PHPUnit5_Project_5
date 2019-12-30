@@ -39,7 +39,7 @@ return function (App $app) {
  $container['db'] = function ($container) use ($capsule){
     return $capsule;
   };
-  /*  $container['db'] = function ($c) {
+    /*$container['db'] = function ($c) {
        try {
            $db = new PDO("sqlite:".__DIR__."/blog.db");
            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
