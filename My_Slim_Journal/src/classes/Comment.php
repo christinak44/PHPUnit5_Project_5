@@ -1,20 +1,26 @@
 <?php
-namespace App\Model;
-use \App\Exception\ApiException;
+namespace App\Classes;
+use App\Exception\ApiException;
+use Illuminate\Database\Eloquent\Model;
 
-class Review
+class Comment extends Model
 {
-    protected $database;
-    public function __construct(\PDO $database)
+   public $timestamps = false;
+   protected $table = 'comments';
+   protected $fillable = ['commenter','comment'];
+}
+/*{
+    protected $db;
+    public function __construct(\PDO $db)
     {
-        $this->database = $database;
+        $this->db = $db;
     }
-    public function getReviewsByC ourseId($course_id)
+    public function getReviewsByCourseId($course_id)
     {
         if (empty($course_id)) {
             throw new ApiException(ApiException::REVIEW_INFO_REQUIRED);
         }
-        $statement = $this->database->prepare('SELECT * FROM reviews WHERE course_id=:course_id');
+        $statement = $this->db->prepare('SELECT * FROM reviews WHERE course_id=:course_id');
         $statement->bindParam('course_id', $course_id);
         $statement->execute();
         $reviews = $statement->fetchAll();
@@ -28,7 +34,7 @@ class Review
         if (empty($review_id)) {
             throw new ApiException(ApiException::REVIEW_INFO_REQUIRED);
         }
-        $statement = $this->database->prepare('SELECT * FROM reviews WHERE id=:id');
+        $statement = $this->db->prepare('SELECT * FROM reviews WHERE id=:id');
         $statement->bindParam('id', $review_id);
         $statement->execute();
         $review = $statement->fetch();
@@ -42,7 +48,7 @@ class Review
         if (empty($data['course_id']) || empty($data['rating']) || empty($data['comment'])) {
             throw new ApiException(ApiException::REVIEW_INFO_REQUIRED);
         }
-        $statement = $this->database->prepare('INSERT INTO reviews (course_id, rating, comment) VALUES (:course_id, :rating, :comment)');
+        $statement = $this->db->prepare('INSERT INTO reviews (course_id, rating, comment) VALUES (:course_id, :rating, :comment)');
         $statement->bindParam('course_id', $data['course_id']);
         $statement->bindParam('rating', $data['rating']);
         $statement->bindParam('comment', $data['comment']);
@@ -50,12 +56,12 @@ class Review
         if ($statement->rowCount()<1) {
             throw new ApiException(ApiException::REVIEW_CREATION_FAILED);
         }
-        return $this->getReview($this->database->lastInsertId());
+        return $this->getReview($this->db->lastInsertId());
     }
     public function updateReview($data)
     {
         $this->getReview($data['review_id']);
-        $statement = $this->database->prepare('UPDATE reviews SET rating=:rating, comment=:comment WHERE id=:id');
+        $statement = $this->db->prepare('UPDATE reviews SET rating=:rating, comment=:comment WHERE id=:id');
         $statement->bindParam('id', $data['review_id']);
         $statement->bindParam('rating', $data['rating']);
         $statement->bindParam('comment', $data['comment']);
@@ -68,7 +74,7 @@ class Review
     public function deleteReview($review_id)
     {
         $this->getReview($review_id);
-        $statement = $this->database->prepare('DELETE FROM reviews WHERE id=:id');
+        $statement = $this->db->prepare('DELETE FROM reviews WHERE id=:id');
         $statement->bindParam('id', $review_id);
         $statement->execute();
         if ($statement->rowCount()<1) {
@@ -76,4 +82,4 @@ class Review
         }
         return ['message' => 'The review was deleted.'];
     }
-}
+}*/
