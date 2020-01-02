@@ -23,10 +23,10 @@ return function (App $app) {
     $app->map(['GET', 'POST'],'/new', function (Request $request, Response $response, array $args) use ($container) {
       if($request->getMethod() == "POST") {
           $args = array_merge($args, $request->getParsedBody());
-             if (!empty($args['title']) && !empty($args['date']) && !empty($args['body'])) {
+             if (!empty($args['title']) /*&& !empty($args['date']) */&& !empty($args['body'])) {
                 $entry = Entry::create([
                          'title' => $args['title'],
-                         'date' => $args['date'],
+                         //'date' => $args['date'],
                          'body' => $args['body']
                 ]);
               echo "Entry created successfully!";
@@ -34,8 +34,8 @@ return function (App $app) {
               return $response->withStatus(302)->withHeader('Location', $url);
             }
       }
-                echo "Entry created successfully!";
-        return $this->view->render($response, 'new.html', $args);
+                //echo "Entry created successfully!";
+        return $this->view->render($response, 'new.twig', $args);
    });
 
     $app->get('/entry/[{id}]', function (Request $request, Response $response, array $args) use ($container) {
