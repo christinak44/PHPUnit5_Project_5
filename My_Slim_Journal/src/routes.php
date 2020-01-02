@@ -52,4 +52,5 @@ return function (App $app) {
         //$args['entry'] = $entries;
         return $this->view->render($response, 'detail.twig', $args);
     });
+    
 };
