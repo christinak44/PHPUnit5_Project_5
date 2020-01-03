@@ -5,9 +5,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Entry extends Model
 {
-   public $timestamps = false;
+   //public $timestamps = false;
    protected $table = 'posts';
-   protected $fillable = ['title','date','body'];
+   const created_at = 'date';
+   //protected $fillable = ['title','date','body'];
 }
 
 /*class Entry

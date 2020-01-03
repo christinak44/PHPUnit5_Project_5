@@ -7,7 +7,7 @@
 {% block content %}
                     <article>
                         <h1> {{ details.title }} </h1>
-                        <time datetime="2016-01-31 1:00"> {{ item.date }} </time>
+                        <time datetime="2016-01-31 1:00"> {{ item.date | date("d-m-Y") }} </time>
                         <div class="entry">
                             <p> {{ details.body }} </p>
                             <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut rhoncus felis, vel tincidunt neque. Vestibulum ut metus eleifend, malesuada nisl at, scelerisque sapien. Vivamus pharetra massa libero, sed feugiat turpis efficitur at.</p>

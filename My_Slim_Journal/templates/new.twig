@@ -5,19 +5,16 @@
 {{ parent() }}
 {% endblock %}
 {% block content %}
-{% if REQUEST_METHOD == POST %}
-{% {title} = trim(filter_input(INPUT_POST, {title}, FILTER_SANITIZE_STRING)) %}
-{% {body} = trim(filter_input(INPUT_POST, {body}, FILTER_SANITIZE_STRING)) %}
-{% endif %}
+
         <section>
             <div class="container">
                 <div class="new-entry">
                     <h2>Publish New Entry</h2>
-                    <form action="" method="post">
+                    <form action="/new" method="post">
                         <label for="title"> Title</label>
                         <input type="text" name="title"><br>
                         <label for="body">Entry</label>
-                        <textarea rows="5" name="bodyy"></textarea>
+                        <textarea rows="5" name="body"></textarea>
                         <input type="submit" value="Publish Entry" class="button">
                         <a href="{{ Blog_Home.twig }}" class="button button-secondary">Cancel</a>
                     </form>

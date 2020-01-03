@@ -24,12 +24,11 @@ return function (App $app) {
       if($request->getMethod() == "POST") {
           $args = array_merge($args, $request->getParsedBody());
              if (!empty($args['title']) /*&& !empty($args['date']) */&& !empty($args['body'])) {
-                $entry = Entry::create([
-                         'title' => $args['title'],
-                         //'date' => $args['date'],
-                         'body' => $args['body']
-                ]);
-              echo "Entry created successfully!";
+               $entry = new Entry;
+               $entry->title = $args['title'];
+               $entry->body = $args['body'];
+               $entry->save();
+             echo "Entry created successfully!";
               $url = $this->router->pathFor('Blog_Home');
               return $response->withStatus(302)->withHeader('Location', $url);
             }
@@ -52,5 +51,5 @@ return function (App $app) {
         //$args['entry'] = $entries;
         return $this->view->render($response, 'detail.twig', $args);
     });
-    
+
 };
