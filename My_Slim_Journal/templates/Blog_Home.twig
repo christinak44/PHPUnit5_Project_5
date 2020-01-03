@@ -9,7 +9,7 @@
                       {% for item in entries %}
                         <article>
                         <h2><a href="/entry/{{ item.id }}" > {{ item.title }} </a></h2>
-                        <time> {{ item.date | date("d-m-Y") }} </time>
+                        <time> {{ item.date | date("m/d/Y") }} </time>
                         </article>
                         {% endfor %}
 
