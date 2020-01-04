@@ -59,12 +59,13 @@ return function (App $app) {
                $entry->title = $args['title'];
                $entry->body = $args['body'];
                $entry->save();
+               $args['details'] = $entry;
              echo "Entry updated successfully!";
               $url = $this->router->pathFor('detail.twig');
               return $response->withStatus(302)->withHeader('Location', $url);
             }
       }
-       
+
                 //echo "Entry created successfully!";
         return $this->view->render($response, 'edit.twig', $args);
    });
