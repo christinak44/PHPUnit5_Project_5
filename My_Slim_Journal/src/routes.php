@@ -64,6 +64,7 @@ return function (App $app) {
               return $response->withStatus(302)->withHeader('Location', $url);
             }
       }
+       
                 //echo "Entry created successfully!";
         return $this->view->render($response, 'edit.twig', $args);
    });
