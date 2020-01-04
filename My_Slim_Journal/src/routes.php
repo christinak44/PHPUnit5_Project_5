@@ -51,5 +51,21 @@ return function (App $app) {
         //$args['entry'] = $entries;
         return $this->view->render($response, 'detail.twig', $args);
     });
+    $app->map(['GET', 'POST'],'/entry/edit/[{id}]', function (Request $request, Response $response, array $args) use ($container) {
+      if($request->getMethod() == "POST") {
+          $args = array_merge($args, $request->getParsedBody());
+             if (!empty($args['title']) && !empty($args['id']) && !empty($args['body'])) {
+               $entry = Entry::find($args['id']);
+               $entry->title = $args['title'];
+               $entry->body = $args['body'];
+               $entry->save();
+             echo "Entry updated successfully!";
+              $url = $this->router->pathFor('detail.twig');
+              return $response->withStatus(302)->withHeader('Location', $url);
+            }
+      }
+                //echo "Entry created successfully!";
+        return $this->view->render($response, 'edit.twig', $args);
+   });
 
 };
