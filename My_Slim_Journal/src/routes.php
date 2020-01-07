@@ -50,26 +50,28 @@ return function (App $app) {
         $args['details'] = $entry;
         //$args['entry'] = $entries;
         return $this->view->render($response, 'detail.twig', $args);
-    });
+    })->SetName('Entry');;
     $app->map(['GET', 'POST'],'/entry/edit/[{id}]', function (Request $request, Response $response, array $args) use ($container) {
-      if($request->getMethod() == "POST") {
-         $entry = Entry::find($args['id']);
-         $args = array_merge($args, $request->getParsedBody());
-         $args['details'] = $entry;
-         var_dump($args['details']);
-             if (!empty($args['title']) && !empty($args['id']) && !empty($args['body'])) {
+        $entry = Entry::find($args['id']);
+        $args['details'] = $entry;
 
+      if($request->getMethod() == "POST") {
+         $args = array_merge($args, $request->getParsedBody());
+             if (!empty($args['title']) && !empty($args['body'])) {
+               $entry = new Entry;
                $entry->title = $args['title'];
                $entry->body = $args['body'];
                $entry->save();
-
+             //$args['details'] = $entry;
              echo "Entry updated successfully!";
-              $url = $this->router->pathFor('detail.twig');
+              $url = $this->router->pathFor('Entry');
               return $response->withStatus(302)->withHeader('Location', $url);
             }
       }
 
                 //echo "Entry created successfully!";
+
+
         return $this->view->render($response, 'edit.twig', $args);
    });
 
