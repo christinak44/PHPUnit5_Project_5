@@ -58,14 +58,13 @@ return function (App $app) {
       if($request->getMethod() == "POST") {
          $args = array_merge($args, $request->getParsedBody());
              if (!empty($args['title']) && !empty($args['body'])) {
-               $entry = new Entry;
+            //   $entry = new Entry;
                $entry->title = $args['title'];
                $entry->body = $args['body'];
                $entry->save();
              //$args['details'] = $entry;
              echo "Entry updated successfully!";
-              $url = $this->router->pathFor('Entry');
-              return $response->withStatus(302)->withHeader('Location', $url);
+              $url = "/entry/" . $args['id'];
             }
       }
 
