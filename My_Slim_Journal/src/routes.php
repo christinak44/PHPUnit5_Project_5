@@ -53,13 +53,16 @@ return function (App $app) {
     });
     $app->map(['GET', 'POST'],'/entry/edit/[{id}]', function (Request $request, Response $response, array $args) use ($container) {
       if($request->getMethod() == "POST") {
-          $args = array_merge($args, $request->getParsedBody());
+         $entry = Entry::find($args['id']);
+         $args = array_merge($args, $request->getParsedBody());
+         $args['details'] = $entry;
+         var_dump($args['details']);
              if (!empty($args['title']) && !empty($args['id']) && !empty($args['body'])) {
-               $entry = Entry::find($args['id']);
+
                $entry->title = $args['title'];
                $entry->body = $args['body'];
                $entry->save();
-               $args['details'] = $entry;
+
              echo "Entry updated successfully!";
               $url = $this->router->pathFor('detail.twig');
               return $response->withStatus(302)->withHeader('Location', $url);
