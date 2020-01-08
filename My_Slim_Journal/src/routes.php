@@ -63,8 +63,9 @@ return function (App $app) {
                $entry->body = $args['body'];
                $entry->save();
              //$args['details'] = $entry;
-             echo "Entry updated successfully!";
-              $url = "/entry/" . $args['id'];
+             $args['message'] = "Entry updated successfully!";
+             $url = "/entry/" . $args['id'];
+      return $response->withStatus(302)->withHeader('Location', $url);
             }
       }
 

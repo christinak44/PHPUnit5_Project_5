@@ -5,6 +5,11 @@
 {{ parent() }}
 {% endblock %}
 {% block content %}
+
+            {% if message is not empty %}
+                    {{- message|title}}
+
+                    {%- endif %}
                     <article>
                         <h1> {{ details.title }} </h1>
                         <time datetime="2016-01-31 1:00"> {{ item.created_at | date("m-d-Y") }} </time>
