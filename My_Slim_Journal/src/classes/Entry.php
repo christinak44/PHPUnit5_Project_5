@@ -10,4 +10,8 @@ class Entry extends Model
    //const created_at = 'date';
    //protected $dateFormat = 'd/m/y';
    //protected $fillable = ['title','date','body'];
+   public function comments()
+     {
+        return $this->hasMany('App\Comment', 'entry_id');
+     }
 }

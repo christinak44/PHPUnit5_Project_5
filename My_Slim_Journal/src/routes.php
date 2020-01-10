@@ -42,6 +42,9 @@ return function (App $app) {
 
         $args['details'] = $entry;
 
+        $comments = Comment::with('entry_id')->where('entry_id' == $args['id']);
+        var_dump($comments);
+
         return $this->view->render($response, 'detail.twig', $args);
     })->SetName('Entry');;
 
