@@ -35,7 +35,7 @@ return function (App $app) {
         return $this->view->render($response, 'new.twig', $args);
    });
     //load single entry details
-    $app->get('/entry/[{id}]', function (Request $request, Response $response, array $args) use ($container) {
+    $app->map(['GET', 'POST'],'/entry/{id}', function (Request $request, Response $response, array $args) use ($container) {
 
 
         $entry = Entry::find($args['id']);
@@ -49,7 +49,7 @@ return function (App $app) {
     })->SetName('Entry');;
 
     //retrieve entry in edit view
-    $app->map(['GET', 'POST'],'/entry/edit/[{id}]', function (Request $request, Response $response, array $args) use ($container) {
+    $app->map(['GET', 'POST'],'/entry/edit/{id}', function (Request $request, Response $response, array $args) use ($container) {
         $entry = Entry::find($args['id']);
         $args['details'] = $entry;
 

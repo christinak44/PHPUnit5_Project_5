@@ -1,6 +1,5 @@
 <?php
 namespace App\Classes;
-use App\Exception\ApiException;
 use Illuminate\Database\Eloquent\Model;
 
 class Entry extends Model
@@ -10,7 +9,7 @@ class Entry extends Model
    //const created_at = 'date';
    //protected $dateFormat = 'd/m/y';
    //protected $fillable = ['title','date','body'];
-   public function comments()
+   public function entry()
      {
         return $this->hasMany('App\Comment', 'entry_id');
      }
