@@ -26,7 +26,7 @@ return function (App $app) {
                $entry->title = $args['title'];
                $entry->body = $args['body'];
                $entry->save();
-             echo "Entry created successfully!";
+             $args['blurp'] = "Entry created successfully!";
               $url = $this->router->pathFor('Blog_Home');
               return $response->withStatus(302)->withHeader('Location', $url);
             }

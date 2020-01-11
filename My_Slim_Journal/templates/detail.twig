@@ -5,9 +5,9 @@
 {{ parent() }}
 {% endblock %}
 {% block content %}
-
+           <!-- redirects to home page after displaying update success-->
             {% if message is not empty %}
-                    {{- message|title}}
+                    {{- message|title}}      
              <meta http-equiv="refresh" content="3; URL= /">
                     {%- endif %}
 

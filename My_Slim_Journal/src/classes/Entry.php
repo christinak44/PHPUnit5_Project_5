@@ -1,7 +1,6 @@
 <?php
 namespace App\Classes;
 use Illuminate\Database\Eloquent\Model;
-use App\Comment;
 class Entry extends Model
 {
    //public $timestamps = false;
@@ -11,7 +10,7 @@ class Entry extends Model
    //protected $fillable = ['title','date','body'];
    public function entry()
      {
-        return $this->hasMany('App\Comment', 'entry_id');
+        return $this->hasMany('App\Classes\Comment', 'Post_ID');
      }
 //removes associated comments when post is deleted
      public function delete()

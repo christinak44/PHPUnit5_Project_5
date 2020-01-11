@@ -12,16 +12,20 @@ body {
 }
 .container {
 	margin: 0 auto;
-	padding: 0 25px;
+	padding: 1px;
 	background: #FFF;
 }
 header .site-header {
-	border-bottom: 1px solid #d1d1d1;
+  background: #0e5f0e;
+	border-bottom: 5px solid #444;
 	margin: 0 auto;
+	padding: 0px;
 	height: 95px;
 }
 header .logo {
 	border: 5px solid #000;
+
+	background: #ec316a;
 	text-decoration: none;
 	color: #000;
 	font-size: 21px;
@@ -173,7 +177,7 @@ a.link {
 	margin-bottom: 40px;
 }
 .entry-comments {
-	background: #f1f1f1;
+	background: #d7eef4;
 	padding: 70px 0;
 }
 .entry-comments .container {
@@ -261,17 +265,3 @@ form textarea:hover {
 input[type=submit] {
 	margin-right: 5px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

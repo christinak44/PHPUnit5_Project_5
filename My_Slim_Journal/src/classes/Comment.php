@@ -9,7 +9,7 @@ class Comment extends Model
    //protected $fillable = ['commenter','comment'];
    public function comment()
    {
-        return $this->belongsTo('App\Entry');
+        return $this->belongsTo('App\Classes\Entry', 'Post_ID');
    }
 
 }
