@@ -8,15 +8,14 @@
 
             {% if message is not empty %}
                     {{- message|title}}
-
+             <meta http-equiv="refresh" content="3; URL= /">
                     {%- endif %}
+
                     <article>
                         <h1> {{ details.title }} </h1>
                         <time datetime="2016-01-31 1:00"> {{ item.created_at | date("m-d-Y") }} </time>
                         <div class="entry">
                             <p> {{ details.body }} </p>
-                            <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut rhoncus felis, vel tincidunt neque. Vestibulum ut metus eleifend, malesuada nisl at, scelerisque sapien. Vivamus pharetra massa libero, sed feugiat turpis efficitur at.</p>
-                            <p>Cras egestas ac ipsum in posuere. Fusce suscipit, libero id malesuada placerat, orci velit semper metus, quis pulvinar sem nunc vel augue. In ornare tempor metus, sit amet congue justo porta et. Etiam pretium, sapien non fermentum consequat, <a href="">dolor augue</a> gravida lacus, non accumsan lorem odio id risus. Vestibulum pharetra tempor molestie. Integer sollicitudin ante ipsum, a luctus nisi egestas eu. Cras accumsan cursus ante, non dapibus tempor.</p>-->
                             <p><a class="link" href="/entry/edit/{{ details.id }}">Edit Entry</a></p>
                         </div>
                     </article>
@@ -27,17 +26,38 @@
             <div class="container">
                     <h2>Comments</h2>
                     <div class="comment">
-                        <strong>Carling Kirk</strong>
-                        <time datetime="2016-01-31 1:00">January 31, 2016 at 1:00</time>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut rhoncus felis, vel tincidunt neque. Vestibulum ut metus eleifend, malesuada nisl at, scelerisque sapien. Vivamus pharetra massa libero, sed feugiat turpis efficitur at.</p>
+                    {% if comments|length > 1 %}
+                    {% for item in comments %}
+
+                        <strong>{{item.name}}</strong>
+                        <time datetime="2016-01-31 1:00">{{ item.created_at|date("F jS, Y") }}</time>
+                        <p> {{ item.comment }} </p>
+
+                    <br>
+
+                      {% endfor %}
+                    {% else %}
+                    {% for item in comments %}
+
+                        <strong>{{item.name}}</strong>
+                        <time datetime="2016-01-31 1:00">{{ item.created_at|date("F jS, Y") }}</time>
+                        <p> {{ item.comment }} </p>
+                      {% endfor %}
+                    {% endif %}
                     </div>
                     <div class="new-comment">
-                        <form>
+                        <form action = "/entry/{{ details.id }}" method = "post">
                               <label for="name"> Name</label>
                               <input type="text" name="name"><br>
                               <label for="comment">Comment</label>
                               <textarea rows="5" name="comment"></textarea>
                               <input type="submit" value="Post Comment" class="button">
+                              <a href="/entry/{{ details.id }}" class="button button-secondary">Cancel</a>
+                              <input type="hidden" name="Post_ID" value=" {{ details.id }} " >
+                              <form action="/entry/{{ details.id }}" method="POST"> <br>
+							                <br><input type="submit" value="Remove?{{ removed.id }}" class="button button-secondary" style="color:red;">
+
+						</form>
                         </form>
                     </div>
             </div>

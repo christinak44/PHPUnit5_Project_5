@@ -42,9 +42,37 @@ return function (App $app) {
 
         $args['details'] = $entry;
 
-        $comments = Comment::with('entry_id')->where('entry_id' == $args['id']);
-        var_dump($comments);
 
+
+        //display $comments
+        $comments = Comment::where('Post_ID', $args['id'])->get();
+
+        $args['comments'] = $comments;
+        //add comment
+        if($request->getMethod() == "POST") {
+            $args = array_merge($args, $request->getParsedBody());
+          if (!empty($args['name']) && !empty($args['comment'])/* && !empty($args['id'])*/) {
+                 $comment = new Comment;
+                 $comment->name = $args['name'];
+                 $comment->comment = $args['comment'];
+                 $comment->Post_ID = $args['id'];
+                 $comment->save();
+
+                 $args['notice'] = "comment added";
+                 $url = "/entry/" . $args['id'];
+                 return $response->withStatus(302)->withHeader('Location', $url);
+               }
+        }
+
+        //delete entry
+        if($request->getMethod() == "POST") {
+            $remove_entry = Entry::destroy($args['id']);
+
+            $args['removed'] = $remove_entry;
+                $args['notice'] = "post removed";
+                $url = $this->router->pathFor('Blog_Home');
+                return $response->withStatus(302)->withHeader('Location', $url);
+              }
         return $this->view->render($response, 'detail.twig', $args);
     })->SetName('Entry');;
 

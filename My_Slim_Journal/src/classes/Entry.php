@@ -1,7 +1,7 @@
 <?php
 namespace App\Classes;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Comment;
 class Entry extends Model
 {
    //public $timestamps = false;
@@ -13,4 +13,10 @@ class Entry extends Model
      {
         return $this->hasMany('App\Comment', 'entry_id');
      }
+//removes associated comments when post is deleted
+     public function delete()
+    {
+      $this->entry()->delete();
+      parent::delete();
+    }
 }
