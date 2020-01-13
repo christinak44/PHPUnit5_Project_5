@@ -7,7 +7,7 @@
 {% block content %}
            <!-- redirects to home page after displaying update success-->
             {% if message is not empty %}
-                    {{- message|title}}      
+                    {{- message|title}}
              <meta http-equiv="refresh" content="3; URL= /">
                     {%- endif %}
 
@@ -25,7 +25,11 @@
         <section class="entry-comments">
             <div class="container">
                     <h2>Comments</h2>
+                    {% if comment_notice is not empty %}
+                            {{ comment_notice|title }}
+                            {%- endif %}
                     <div class="comment">
+
                     {% if comments|length > 1 %}
                     {% for item in comments %}
 
@@ -46,7 +50,9 @@
                     {% endif %}
                     </div>
                     <div class="new-comment">
+
                         <form action = "/entry/{{ details.id }}" method = "post">
+                              <strong style="color:red;"> {{ warning|title }} </strong>
                               <label for="name"> Name</label>
                               <input type="text" name="name"><br>
                               <label for="comment">Comment</label>

@@ -58,9 +58,17 @@ return function (App $app) {
                  $comment->Post_ID = $args['id'];
                  $comment->save();
 
-                 $args['notice'] = "comment added";
+                 $args['comment_notice'] = "comment added";
                  $url = "/entry/" . $args['id'];
                  return $response->withStatus(302)->withHeader('Location', $url);
+               }
+               if (!empty($args['name']) && empty($args['comment'])) {
+                 $args['warning'] = "missing comment!";
+                 return $this->view->render($response, 'detail.twig', $args);
+               }
+               if (empty($args['name']) && !empty($args['comment'])) {
+                 $args['warning'] = "missing name!";
+                 return $this->view->render($response, 'detail.twig', $args);
                }
         }
 
@@ -69,7 +77,7 @@ return function (App $app) {
             $remove_entry = Entry::destroy($args['id']);
 
             $args['removed'] = $remove_entry;
-                $args['notice'] = "post removed";
+                $args['remove_notice'] = "post removed";
                 $url = $this->router->pathFor('Blog_Home');
                 return $response->withStatus(302)->withHeader('Location', $url);
               }

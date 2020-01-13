@@ -6,8 +6,8 @@
 {% endblock %}
 
 {% block content %}
-{% if notice is not empty %}
-        {{- notice|title}}
+{% if remove_notice is not empty %}
+        {{ remove_notice|title }}
 
         {%- endif %}
 
