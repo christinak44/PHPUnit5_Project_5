@@ -70,6 +70,10 @@ return function (App $app) {
                  $args['warning'] = "missing name!";
                  return $this->view->render($response, 'detail.twig', $args);
                }
+               if (empty($args['name']) && empty($args['comment'])) {
+                 $args['warning'] = "name and comment needed for submit.";
+                 return $this->view->render($response, 'detail.twig', $args);
+               }
         }
 
         //delete entry
