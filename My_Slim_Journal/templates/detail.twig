@@ -10,6 +10,10 @@
                     {{- message|title}}
              <meta http-equiv="refresh" content="3; URL= /">
                     {%- endif %}
+            {% if comment_notice is not empty %}
+                  <strong>  {{ comment_notice|title }} </strong>
+              <meta http-equiv="refresh" content="3; URL= "/entry/" . $args['id']">
+                    {%- endif %}
 
                     <article>
                         <h1> {{ details.title }} </h1>
@@ -25,9 +29,7 @@
         <section class="entry-comments">
             <div class="container">
                     <h2>Comments</h2>
-                    {% if comment_notice is not empty %}
-                            {{ comment_notice|title }}
-                            {%- endif %}
+
                     <div class="comment">
 
                     {% if comments|length > 1 %}
@@ -60,8 +62,9 @@
                               <input type="submit" value="Post Comment" class="button">
                               <a href="/entry/{{ details.id }}" class="button button-secondary">Cancel</a>
                               <input type="hidden" name="Post_ID" value=" {{ details.id }} " >
+
                               <form action="/entry/{{ details.id }}" method="POST"> <br>
-							                <br><input type="submit" value="Remove?{{ removed.id }}" class="button button-secondary" style="color:red;">
+							                <br><input type="submit" name="Delete" value="Remove?{{ removed.id }}" class="button button-secondary" style="color:red;">
 
 						</form>
                         </form>

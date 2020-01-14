@@ -7,8 +7,13 @@
 
 {% block content %}
 {% if remove_notice is not empty %}
-        {{ remove_notice|title }}
+      <strong> {{ remove_notice|title }} </strong>
+      <meta http-equiv="refresh" content="3; URL= /">
+        {%- endif %}
 
+{% if blurp is not empty %}
+      <strong style="color:green;"> {{ blurp|title }} </strong>
+     <meta http-equiv="refresh" content="3; URL= /">
         {%- endif %}
 
                       {% for item in entries %}

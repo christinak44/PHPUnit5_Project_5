@@ -27,8 +27,7 @@ return function (App $app) {
                $entry->body = $args['body'];
                $entry->save();
              $args['blurp'] = "Entry created successfully!";
-              $url = $this->router->pathFor('Blog_Home');
-              return $response->withStatus(302)->withHeader('Location', $url);
+             return $this->view->render($response, 'Blog_Home.twig', $args);
             }
       }
 
@@ -59,8 +58,7 @@ return function (App $app) {
                  $comment->save();
 
                  $args['comment_notice'] = "comment added";
-                 $url = "/entry/" . $args['id'];
-                 return $response->withStatus(302)->withHeader('Location', $url);
+                 return $this->view->render($response, 'detail.twig', $args);
                }
                if (!empty($args['name']) && empty($args['comment'])) {
                  $args['warning'] = "missing comment!";
@@ -70,21 +68,22 @@ return function (App $app) {
                  $args['warning'] = "missing name!";
                  return $this->view->render($response, 'detail.twig', $args);
                }
-               if (empty($args['name']) && empty($args['comment'])) {
+               /*if (empty($args['name']) && empty($args['comment'])) {
                  $args['warning'] = "name and comment needed for submit.";
                  return $this->view->render($response, 'detail.twig', $args);
-               }
+               }*/
+
         }
 
         //delete entry
-        if($request->getMethod() == "POST") {
+        if(/*$request->getMethod() == "POST" &&*/ ISSET($args['Delete'])) {
             $remove_entry = Entry::destroy($args['id']);
 
             $args['removed'] = $remove_entry;
                 $args['remove_notice'] = "post removed";
-                $url = $this->router->pathFor('Blog_Home');
-                return $response->withStatus(302)->withHeader('Location', $url);
+                return $this->view->render($response, 'Blog_Home.twig', $args);
               }
+
         return $this->view->render($response, 'detail.twig', $args);
     })->SetName('Entry');;
 
